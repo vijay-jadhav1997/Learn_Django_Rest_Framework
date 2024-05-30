@@ -44,6 +44,21 @@ def student_data(request, stud_id):
   
 @csrf_exempt
 def student_create(request):
+  if request.method == 'GET':
+    data = request.body
+    stream = io.BytesIO(data)
+    python_data = JSONParser().parse(stream)
+    id = python_data.get('id', None)
+    if id is not None:
+      students = Student.objects.get(id=id)
+      serializer = StudentSerializer(students)
+    else:  
+      students = Student.objects.all()
+      serializer = StudentSerializer(students, many=True)
+    json_data = JSONRenderer().render(serializer.data)
+    return HttpResponse(json_data, content_type='application/json')
+
+  
   if request.method == 'POST':
     json_data = request.body
     stream = io.BytesIO(json_data)
@@ -52,7 +67,7 @@ def student_create(request):
 
     if serializer.is_valid():
       serializer.save()
-      response = {'message': 'Data Created'}
+      response = {'message': f'New student name {python_data.get('name')}, admission successfully completed!🎉✨'}
       json_response = JSONRenderer().render(response)
       return HttpResponse(json_response, content_type='application/json')
     

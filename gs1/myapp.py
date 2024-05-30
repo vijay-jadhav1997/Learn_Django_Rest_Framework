@@ -3,17 +3,40 @@ import json
 
 
 
-URL = 'http://127.0.0.1:8000//student_create/'
+URL = 'http://127.0.0.1:6000//student_create/'
+
+def get_data(id = None):
+  data = {}
+  if id is not None:
+    data = {
+      'id': id
+    }
+
+  json_data = json.dumps(data)
+  req = requests.get(url = URL, data = json_data)
+
+  data = req.json()
+  print('\n\n💥💯🌼 ', data)
 
 
-data = {
-  'name': 'Jay Hari',
-  'roll': 18501,
-  'city': 'Alandi'
-}
 
-json_data = json.dumps(data)
-req = requests.post(url = URL, data = json_data)
+def post_data():
+  data = {
+    'name': 'Rajesh',
+    'roll': 69,
+    'city': 'Mayapur'
+  }
 
-data = req.json()
-print('\n\n💥💯🌼 ', data)
+  json_data = json.dumps(data)
+  req = requests.post(url = URL, data = json_data)
+
+  data = req.json()
+  print('\n\n💥💯🌼 ', data)
+
+def main():
+  post_data() 
+  # get_data(1)
+  pass 
+
+if __name__ == '__main__':
+  main()
