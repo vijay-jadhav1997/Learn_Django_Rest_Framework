@@ -7,7 +7,7 @@ def start_with_r(value):
   if value[0].lower() != 'r':
     raise serializers.ValidationError("Name should start with R.")
 
-class StudentSerializer(serializers.Serializer):
+class StudentSerializer1(serializers.Serializer):
   name = serializers.CharField( max_length=70, validators=[start_with_r])
   roll = serializers.IntegerField( )
   city = serializers.CharField( max_length=70)
@@ -26,3 +26,9 @@ class StudentSerializer(serializers.Serializer):
     if data.get('name').lower().startswith('p') and data.get('roll') > 50:
       raise serializers.ValidationError(f"When Student name start with 'p', the roll number must be less than 50 💯")
     return data
+
+
+class StudentSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Student
+    fields = "__all__"
