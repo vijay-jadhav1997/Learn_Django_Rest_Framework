@@ -36,3 +36,17 @@ class StudentSerializer(serializers.ModelSerializer):
     model = Student
     fields = ["id", "name", "marks", "result"]
 ```
+
+
+### Function Based api_view
+### Class based APIView
+### Generic APIView and Mixins
+### Concrete View Class
+| Single | Grouping Together|
+|:----:|:------|
+| ListAPIView | ListCreateAPIView |
+| CreateAPIView | RetrieveUpdateAPIView|
+| RetrieveAPIView | RetrieveDestroyAPIView|
+| UpdateAPIView | RetrieveUpdateDestroyAPIView|
+| DestroyAPIView | |
+
