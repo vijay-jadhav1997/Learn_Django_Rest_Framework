@@ -90,3 +90,18 @@ class StudentViewSetAPI(viewsets.ViewSet):
       student = Student.objects.get(pk=pk)
       student.delete()
       return Response({'message':'Deleted Successfully..!'}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+#! ModelViewSet Class:
+class StudentModelViewSetAPI(viewsets.ModelViewSet):
+  queryset = Student.objects.all()
+  serializer_class = StudentSerializer
+
+
+#! ReadOnlyModelViewSet Class:
+class StudentReadOnlyModelViewSetAPI(viewsets.ReadOnlyModelViewSet):
+  queryset = Student.objects.all()
+  serializer_class = StudentSerializer
+
